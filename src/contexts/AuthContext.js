@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 
 const AuthContext = React.createContext();
@@ -8,16 +8,16 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
 	const [loading, setLoading] = useState(true);
-	const [user, setUser] = useState({});
-	const history = useHistory();
+	const [user, setUser] = useState(null);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		auth.onAuthStateChanged(user => {
 			setUser(user);
 			setLoading(false);
-			history.push('/chats');
+			if (user) navigate('/chats');
 		});
-	}, [user, history]);
+	}, [user, navigate]);
 
 	const value = { user };
 
