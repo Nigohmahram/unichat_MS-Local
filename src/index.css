@@ -83,6 +83,11 @@
 	color: white;
 }
 
+.github {
+	background-color: #5d8fe0;
+	color: white;
+}
+
 #loading-container {
 	position: absolute;
 	top: 0px;
